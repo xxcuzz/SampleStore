@@ -1,14 +1,48 @@
 ﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
+  text-align: center;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.nav-with-banner{
+  position: fixed;
+  z-index: 999;
+  background-color: #ffffffab;
+  backdrop-filter: blur(10px);
 }
 
-table {
-    margin: 0 auto;
+.banner {
+  --gap: 1rem;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+
+  font-family: 'airbn2plt', sans-serif;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  padding: 0.5rem 0;
+  
+  border-bottom: 1px solid rgb(193,193,193);
+}
+
+.banner__content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: var(--gap);
+  animation: running-line 20s linear infinite;
+
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+@keyframes running-line {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }

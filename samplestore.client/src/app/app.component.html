@@ -1,1 +1,16 @@
-<img src="samplestore.png" style="width: 100vw; height: 100vh;"/>
+<header>
+  <div class="nav-with-banner">
+    <div class="banner">
+      <ul class="banner__content">
+        <li *ngFor="let line of lines">{{line}}</li>
+      </ul>
+
+      <ul aria-hidden="true" class="banner__content">
+        <li *ngFor="let line of lines">{{line}}</li>
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+<img src="samplestore.png" style="width: 100vw; height: 100vh;" />

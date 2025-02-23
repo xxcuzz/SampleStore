@@ -11,6 +11,13 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  readonly lines = ['WEAR STYLE', 
+    '•',
+    '2 DAY DELIVERY FOR POLAND & UK',
+    '•', 
+    'COMPLEMENTARY SHIPPING ON ORDERS OVER $300',
+    '•'];
+
   ngOnInit() { }
 
   title = 'samplestore.client';
