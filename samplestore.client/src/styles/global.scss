@@ -1,0 +1,21 @@
+@use 'elements/containers.scss';
+@use 'elements/griddot.scss';
+
+:root{
+    --light-grey-color: rgb(193,193,193);
+}
+
+@font-face {
+    font-family: airbn2plt;
+    src: url('../assets/fonts/arbn2plt.ttf');
+}
+
+html,
+body {
+    margin: 0;
+    font-size: 25px;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}

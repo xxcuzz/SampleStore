@@ -1,16 +1,9 @@
-<header>
-  <div class="nav-with-banner">
-    <div class="banner">
-      <ul class="banner__content">
-        <li *ngFor="let line of lines">{{line}}</li>
-      </ul>
+<app-header />
 
-      <ul aria-hidden="true" class="banner__content">
-        <li *ngFor="let line of lines">{{line}}</li>
-      </ul>
-    </div>
-
+<body>
+  <div class="container posthuman-image-container">
+    <img src="posthuman.webp" style="width: 100%; height: 100%; overflow: hidden;" />
   </div>
-</header>
 
-<img src="samplestore.png" style="width: 100vw; height: 100vh;" />
+  <img src="samplestore.png" style="width: 100%; height: 100vh;" />
+</body>

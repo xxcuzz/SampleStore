@@ -1,0 +1,134 @@
+.header {
+    position: sticky;
+    z-index: 420;
+    top: 0;
+}
+
+.nav-with-banner {
+    background-color: #ffffffab;
+    backdrop-filter: blur(10px);
+    font-family: 'airbn2plt', sans-serif;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    width: 100%;
+}
+
+.banner {
+    --gap: 1rem;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+
+    font-family: 'airbn2plt', sans-serif;
+    padding: 0.3rem 0;
+
+    border-bottom: 1px solid var(--light-grey-color);
+}
+
+.banner__content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: var(--gap);
+    animation: running-line 100s linear infinite;
+
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+@keyframes running-line {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
+.navbar-menu {
+    width: 100%;
+    height: 2rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    border: 1px solid var(--light-grey-color);
+    border-top: none;
+    font-size: 0.7rem;
+}
+
+
+.navbar-button-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid var(--light-grey-color);
+}
+
+.navbar-button-wrapper:last-child {
+    border-right: none;
+}
+
+.navbar-button-wrapper:nth-child(1) {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.navbar-button-wrapper:nth-child(2) {
+    text-align: right;
+    flex-grow: 5;
+}
+
+.navbar-button-wrapper:nth-child(3) {
+    flex-grow: 1.25;
+}
+
+.navbar-button-wrapper:nth-child(4) {
+    text-align: right;
+    flex-grow: 0.5;
+}
+
+.navbar-button-wrapper:nth-child(5) {
+    flex-grow: 1;
+    margin-left: auto;
+}
+
+.menu-icon-wrapper {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.menu-icon {
+    width: 0.7rem;
+    height: 0.7rem;
+    background-image: url('../../../../../../public/dot-icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.menu-button {
+    margin-right: auto;
+}
+
+.home-button {
+    margin-left: auto;
+}
+
+.search-button {
+    margin: auto;
+}
+
+.currency-button {
+    margin-left: auto;
+}
+
+.cart-button {
+    padding-left: auto;
+}
