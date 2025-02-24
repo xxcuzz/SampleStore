@@ -2,16 +2,113 @@
   text-align: center;
 }
 
-.posthuman-image {
-  overflow: hidden;
-}
-
 .posthuman-image-container {
-  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
-// .posthuman-image-container img {
-//   width: 100%;
-//   height: 100%;
-//   clip-path: inset(10% 0 10% 0); /* Обрезаем 10% сверху и 10% снизу */
+.posthuman-image {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .posthuman-image-container {
+    width: 100vw;
+    /* Ширина контейнера на всю ширину экрана */
+    margin-left: -50vw;
+    /* Смещение контейнера влево на половину ширины экрана */
+    left: 50%;
+    /* Смещение контейнера вправо на половину ширины экрана */
+  }
+
+  .posthuman-image {
+    width: 100vw;
+    /* Ширина изображения на всю ширину экрана */
+    height: 700px;
+    /* Автоматическая высота для сохранения пропорций */
+    left: 0;
+    /* Сброс смещения */
+  }
+}
+
+.hero-component {
+  position: absolute;
+  bottom: 10rem;
+  left: 0%;
+  right: 0%;
+}
+
+.hero-caption {
+  font-family: 'airbn2plt', sans-serif;
+  color: white;
+  text-align: center;
+  text-shadow: 1px 2px #000000;
+}
+
+.hero_cta-wrapper {
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  position: absolute;
+  top: auto;
+  bottom: 8%;
+  left: 0%;
+  right: 0%;
+}
+
+.hero_cta {
+  position: relative;
+  text-transform: uppercase;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  background-color: transparent;
+}
+
+.hero_cta-icon {
+  height: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.hero_cta-icon:hover {
+  color: var(--orange-red);
+}
+
+.hero_cta-text {
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  font-family: 'airbn2plt';
+  font-size: 0.7rem;
+  top: 1.15rem;
+}
+
+// .hero_cta-circle {
+//   width: .7rem;
+//   height: .7rem;
+//   background-color: var(--royal-blue);
+//   border-radius: 50%;
+//   transition: all .2scubic-bezier(.075, .82, .165, 1);
+//   position: absolute;
+//   top: auto;
+//   bottom: 0%;
+//   left: auto;
+//   right: 25%;
+// }
+
+// .hero_cta-circle.is-2 {
+//   right: 16%;
 // }

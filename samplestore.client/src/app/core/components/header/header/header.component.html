@@ -1,47 +1,46 @@
 <div class="header">
-    <div class="nav-with-banner">
-        <div class="banner">
-            <ul class="banner__content">
-                <li *ngFor="let line of lines">{{line}}</li>
-            </ul>
+  <div class="nav-with-banner">
+    <div class="banner">
+      <ul class="banner__content">
+        <li *ngFor="let line of lines">{{line}}</li>
+      </ul>
 
-            <ul aria-hidden="true" class="banner__content">
-                <li *ngFor="let line of lines">{{line}}</li>
-            </ul>
-        </div>
-
-
-        <div class="header-navbar container">
-            <nav class="navbar">
-                <div class="navbar-menu">
-                    <div class="navbar-button-wrapper griddot-parent">
-                        <div class="menu-icon-wrapper">
-                            <div class="menu-icon"></div>
-                            <div class="menu-button">Menu</div>
-                        </div>
-                        <div class="griddot is-bottom-left"></div>
-                        <div class="griddot is-bottom-right"></div>
-                    </div>
-                    <div class="navbar-button-wrapper">
-                        <div class="home-button">Home</div>
-                    </div>
-                    <div class="navbar-button-wrapper">
-                        <div class="search-button">Search</div>
-                        <div class="search-button-icon"></div>
-                    </div>
-                    <div class="navbar-button-wrapper">
-                        <div class="currency-button">Currency</div>
-                    </div>
-                    <div class="navbar-button-wrapper griddot-parent">
-                        <div class="menu-icon-wrapper">
-                            <div class="menu-icon"></div>
-                            <div class="cart-button">Cart</div>
-                        </div>
-                        <div class="griddot is-bottom-left"></div>
-                        <div class="griddot is-bottom-right"></div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+      <ul aria-hidden="true" class="banner__content">
+        <li *ngFor="let line of lines">{{line}}</li>
+      </ul>
     </div>
+
+    <div class="header-navbar container">
+      <nav class="navbar">
+        <div class="navbar-menu">
+          <div class="navbar-button-wrapper griddot-parent">
+            <div class="menu-icon-wrapper">
+              <div class="menu-icon"></div>
+              <div class="navbar-button menu-button">Menu</div>
+            </div>
+            <div class="griddot is-bottom-left"></div>
+            <div class="griddot is-bottom-right"></div>
+          </div>
+          <div class="navbar-button-wrapper">
+            <div class="navbar-button home-button">Home</div>
+          </div>
+          <div class="navbar-button-wrapper">
+            <div class="navbar-button search-button">Search</div>
+            <div class="search-button-icon"></div>
+          </div>
+          <div class="navbar-button-wrapper">
+            <div class="navbar-button currency-button">Currency</div>
+          </div>
+          <div class="navbar-button-wrapper griddot-parent">
+            <div class="menu-icon-wrapper">
+              <div class="menu-icon"></div>
+              <div class="navbar-button cart-button">Cart</div>
+            </div>
+            <div class="griddot is-bottom-left"></div>
+            <div class="griddot is-bottom-right"></div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
 </div>
