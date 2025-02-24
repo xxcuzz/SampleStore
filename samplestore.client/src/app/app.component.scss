@@ -11,7 +11,7 @@
   position: absolute;
   left: 0;
   width: 100%;
-  height: 700px;
+  height: 770px;
   object-fit: cover;
 }
 
@@ -28,7 +28,7 @@
   .posthuman-image {
     width: 100vw;
     /* Ширина изображения на всю ширину экрана */
-    height: 700px;
+    height: 770px;
     /* Автоматическая высота для сохранения пропорций */
     left: 0;
     /* Сброс смещения */
@@ -37,16 +37,19 @@
 
 .hero-component {
   position: absolute;
-  bottom: 10rem;
+  top: 72%;
   left: 0%;
   right: 0%;
 }
 
 .hero-caption {
-  font-family: 'airbn2plt', sans-serif;
+  position: relative;
+
+  font-family: 'airbn2plt';
+  font-size: 0.7rem;
   color: white;
   text-align: center;
-  text-shadow: 1px 2px #000000;
+  text-shadow: 2px 3px #000000;
 }
 
 .hero_cta-wrapper {
