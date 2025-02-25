@@ -11,27 +11,21 @@
   position: absolute;
   left: 0;
   width: 100%;
-  height: 770px;
+  height: 82vh;
   object-fit: cover;
 }
 
 @media (max-width: 700px) {
   .posthuman-image-container {
     width: 100vw;
-    /* Ширина контейнера на всю ширину экрана */
     margin-left: -50vw;
-    /* Смещение контейнера влево на половину ширины экрана */
-    left: 50%;
-    /* Смещение контейнера вправо на половину ширины экрана */
+    left: 50%;  /*classic*/
   }
 
   .posthuman-image {
     width: 100vw;
-    /* Ширина изображения на всю ширину экрана */
     height: 770px;
-    /* Автоматическая высота для сохранения пропорций */
     left: 0;
-    /* Сброс смещения */
   }
 }
 
@@ -44,7 +38,6 @@
 
 .hero-caption {
   position: relative;
-
   font-family: 'airbn2plt';
   font-size: 0.7rem;
   color: white;

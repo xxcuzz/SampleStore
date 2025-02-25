@@ -1,0 +1,65 @@
+@use 'mixins/blur';
+
+:host {
+  @include blur.white;
+  display: block;
+  z-index: 999;
+  position: relative;
+  width: 90%;
+  font-size: var(--menu-text-size);
+  user-select: none;
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.app-header-menu-inner {
+  display: flex;
+  flex: 1 1 auto;
+
+  border-left: 1px solid var(--light-grey-color) ;
+}
+
+.header-menu-item {
+  text-align: left;
+  padding: 0.5rem 0;
+  border-right: 1px solid var(--light-grey-color);
+  border-bottom: 1px solid var(--light-grey-color);
+}
+
+.header-menu-item a {
+  display: block;
+  padding: 0.2rem clamp(0.1rem, 2%, 1rem);
+  text-decoration: none;
+  color:black;
+}
+
+.header-menu-item a:first-child {
+  font-weight: bold;
+}
+
+.item-1 {
+  flex-grow: 1;
+}
+
+.item-2 {
+  flex-grow: 2;
+}
+
+.item-3 {
+  flex-grow: 2;
+}
+
+.item-4 {
+  flex-grow: 4;
+}
+
+.item-5 {
+  flex-grow: 1;
+}
+
+@media(max-width: 700px) {
+  :host {
+    font-size: 0.3rem;
+    width: 100%;
+  }
+}
+

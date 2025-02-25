@@ -45,9 +45,13 @@
               "src/styles/global.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             },
-            "scripts": []
+            "scripts": [
+              "src/assets/scripts/padding.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -110,9 +114,14 @@
               "src/styles/global.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles"]
+              "includePaths": [
+                "src/styles"
+              ]
             },
-            "scripts": [],
+            "scripts": [
+              "src/assets/scripts/padding.js"
+            ],
+
             "karmaConfig": "karma.conf.js"
           }
         }
