@@ -1,0 +1,65 @@
+$color-orange-red: var(--orange-red);
+
+:host {
+  position: relative;
+  top: 50vh;
+}
+
+.hero-caption {
+  font-family: 'airbn2plt';
+  font-size: 1rem;
+  color: white;
+  text-shadow: 2px 3px #000000;
+
+  @media (max-width: 700px) {
+    font-size: 0.7rem;
+  }
+}
+
+.hero-button-wrapper {
+  justify-content: center;
+  display: flex; // посмотреть чё оно реально делате
+}
+
+.hero-link {
+  height: 1rem;
+  text-decoration: none;
+  &:hover {
+    .hero-button {
+      color: $color-orange-red;
+    }
+  }
+}
+
+.hero-button {
+  height: 1.5rem;
+  color: black;
+}
+
+.hero-button-text {
+  position: relative;
+  color: #fff;
+  font-family: 'airbn2plt';
+  font-size: 0.6rem;
+  top: -1.25rem;
+}
+
+.hero-circle {
+  position: relative;
+  width: .4rem;
+  height: .4rem;
+  background-color: black;
+  border-radius: 50%;
+  transition: all .2scubic-bezier(.075, .82, .165, 1);
+  top: -1rem;
+  left: 4.8rem;
+
+  &:hover {
+    background-color: $color-orange-red;
+  }
+
+  &.is-2 {
+    top: -1.4rem;
+    left: 4rem;
+  }
+}

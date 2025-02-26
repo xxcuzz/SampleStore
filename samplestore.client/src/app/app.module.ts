@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/components/header/header/header.component';
 import { HeaderMenuComponent } from './core/components/header-menu/header-menu/header-menu.component';
+import { HeroComponent } from './core/components/hero/hero.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
