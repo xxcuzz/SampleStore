@@ -54,10 +54,6 @@
   }
 }
 
-.navbar {
-  position: relative;
-}
-
 .navbar-menu {
   display: flex;
   border: 1px solid var(--light-grey-color);
@@ -72,35 +68,34 @@
   padding: 0.5rem clamp(0.3rem, 2%, 1rem);
   border-right: 1px solid var(--light-grey-color);
   cursor: pointer;
-  flex-basis: 0;
-}
+  flex: 0 0 auto;
 
-.navbar-button-wrapper:last-child {
-  border-right: none;
-}
+  &:last-child {
+    border-right: none;
+  }
 
-.navbar-button-wrapper:nth-child(1) {
-  text-align: left;
-  flex-grow: 1;
-}
+  &:nth-child(1) {
+    text-align: left;
+    flex: 1;
+  }
 
-.navbar-button-wrapper:nth-child(2) {
-  text-align: right;
-  flex-grow: 4;
-}
+  &:nth-child(2) {
+    text-align: right;
+    flex: 4;
+  }
 
-.navbar-button-wrapper:nth-child(3) {
-  flex-grow: 3;
-}
+  &:nth-child(3) {
+    flex: 3;
+  }
 
-.navbar-button-wrapper:nth-child(4) {
-  text-align: right;
-  flex-grow: 1;
-}
+  &:nth-child(4) {
+    text-align: right;
+    flex: 1;
+  }
 
-.navbar-button-wrapper:nth-child(5) {
-  flex-grow: 1;
-  margin-left: auto;
+  &:nth-child(5) {
+    flex: 1;
+  }
 }
 
 .menu-icon-wrapper {
@@ -113,7 +108,7 @@
 .menu-icon {
   width: 0.7rem;
   height: 0.7rem;
-  background-image: url('../../../../../../public/dot-icon.png');
+  background-image: url('../../../../../assets/icons/dot-icon.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
