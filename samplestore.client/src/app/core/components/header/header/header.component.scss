@@ -60,82 +60,79 @@
   border-top: none;
   font-size: var(--menu-text-size);
   user-select: none;
+  justify-content: space-between;
 }
 
 .navbar-button-wrapper {
   display: flex;
-  align-items: center;
-  padding: 0.5rem clamp(0.3rem, 2%, 1rem);
+  padding: 0.5rem;
+  gap: clamp(0rem, .5rem, .5rem);
   border-right: 1px solid var(--light-grey-color);
   cursor: pointer;
-  flex: 0 0 auto;
+  flex-grow: 1;
 
   &:last-child {
     border-right: none;
   }
 
   &:nth-child(1) {
-    text-align: left;
-    flex: 1;
+    width: 10%;
+    // flex-grow: 1;
   }
 
   &:nth-child(2) {
-    text-align: right;
-    flex: 4;
+    justify-content: end;
+    width: 40%;
+    // flex-grow: 1;
+
   }
 
   &:nth-child(3) {
-    flex: 3;
+    justify-content: center;
+    width: 30%;
+    // flex-grow: 1;
+
   }
 
   &:nth-child(4) {
-    text-align: right;
-    flex: 1;
+    justify-content: end;
+    width: 10%;
+    // flex-grow: 1;
   }
 
   &:nth-child(5) {
-    flex: 1;
+    justify-content: end;
+    width: 10%;
+    // flex-grow: 1;
   }
 }
 
-.menu-icon-wrapper {
+.menu-button-wrapper {
   display: flex;
   justify-content: end;
-  gap: 0.5rem;
+  gap: .5rem;
   width: 100%;
 }
 
-.menu-icon {
+.spiral-icon {
   width: 0.7rem;
   height: 0.7rem;
   background-image: url('../../../../../assets/icons/dot-icon.png');
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
-.menu-button {
-  margin-right: auto;
-}
+@media(max-width: 1200px) {
+  // .navbar-menu {
+  //   font-size: 0.5rem;
+  // }
 
-.home-button {
-  margin-left: auto;
-}
-
-.search-button {
-  margin: auto;
-}
-
-.currency-button {
-  margin-left: auto;
-}
-
-.cart-button {
-  padding-left: auto;
+  .spiral-icon{
+    display: none;
+  }
 }
 
 @media(max-width: 700px) {
   .navbar-menu {
-    height: 1.5rem;
     font-size: 0.4rem;
   }
 
@@ -143,18 +140,14 @@
     display: none;
   }
 
-  .menu-icon-wrapper {
+  .navbar-button-wrapper {
+    width: 100%;
     justify-content: center;
-    align-items: center;
   }
 
   .navbar-button {
     margin: auto;
     text-align: center;
-  }
-
-  .menu-icon-wrapper {
-    gap: 0.3rem;
   }
 
   .container {
