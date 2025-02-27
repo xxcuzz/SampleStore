@@ -6,7 +6,7 @@
   z-index: 999;
   position: relative;
   width: 90%;
-  font-size: var(--menu-text-size);
+  font-size: clamp(0.5rem, 0.5vw, 0.6rem);
   user-select: none;
   margin: 0 auto;
 }
@@ -65,6 +65,7 @@
     flex-direction: column;  
     border-left: 0px;
   }
+
   .header-menu-item{
     width: 100%;
     border-left: 1px solid var(--light-grey-color);
@@ -73,7 +74,6 @@
 
 @media(max-width: 700px) {
   :host {
-    font-size: 0.5rem;
     width: 100%;
   }
 
