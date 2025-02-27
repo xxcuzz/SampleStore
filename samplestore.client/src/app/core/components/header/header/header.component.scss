@@ -6,8 +6,8 @@
   z-index: 100;
   top: 0;
   width: 100%;
-  text-transform: uppercase;  	
-  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
   letter-spacing: .1rem;
   font-family: 'airbn2plt';
   @include blur.white;
@@ -77,33 +77,26 @@
 
   &:nth-child(1) {
     width: 10%;
-    // flex-grow: 1;
   }
 
   &:nth-child(2) {
     justify-content: end;
     width: 40%;
-    // flex-grow: 1;
-
   }
 
   &:nth-child(3) {
     justify-content: center;
     width: 30%;
-    // flex-grow: 1;
-
   }
 
   &:nth-child(4) {
     justify-content: end;
     width: 10%;
-    // flex-grow: 1;
   }
 
   &:nth-child(5) {
     justify-content: end;
     width: 10%;
-    // flex-grow: 1;
   }
 }
 
@@ -122,11 +115,11 @@
 }
 
 @media(max-width: 1200px) {
-  // .navbar-menu {
-  //   font-size: 0.5rem;
-  // }
+  .navbar-menu {
+    font-size: 0.5rem;
+  }
 
-  .spiral-icon{
+  .spiral-icon {
     display: none;
   }
 }
