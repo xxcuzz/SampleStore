@@ -15,13 +15,16 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.*-*</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SampleStore.Application\SampleStore.Application.csproj" />
     <ProjectReference Include="..\samplestore.client\samplestore.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\SampleStore.Infrastructure\SampleStore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

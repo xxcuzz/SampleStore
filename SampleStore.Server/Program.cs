@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Authentication;
+using SampleStore.API.Extensions;
+using SampleStore.Infrastructure.Extensions;
+
 namespace SampleStore.API
 {
     public class Program
@@ -7,7 +11,13 @@ namespace SampleStore.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthorization();
+            builder.Services.AddControllers();
 
+            builder.Services.AddApplicationServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            
+            builder.Services.AddEndpointsApiExplorer();
+            
             var app = builder.Build();
 
             app.UseDefaultFiles();
