@@ -1,9 +1,10 @@
+using ErrorOr;
 using SampleStore.Application.Models;
 
-namespace SampleStore.Application.Interfaces;
+namespace SampleStore.Application.Common.Interfaces.Authentication;
 
 public interface IAuthenticationService
 {
-    AuthenticationResponse Register(string firstName, string lastName, string email, string password);
-    AuthenticationResponse Login(string email, string password);
+    ErrorOr<AuthenticationResponse> Register(string firstName, string lastName, string email, string password);
+    ErrorOr<AuthenticationResponse> Login(string email, string password);
 }

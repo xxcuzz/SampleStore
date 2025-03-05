@@ -1,6 +1,6 @@
 ﻿using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using SampleStore.Application.Interfaces;
+using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Services;
 
 namespace SampleStore.Application.Extensions;

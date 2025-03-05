@@ -1,14 +1,14 @@
+using ErrorOr;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
-using SampleStore.Application.Interfaces;
+using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Models;
 using SampleStore.Application.RequestModels.Authentication;
 
 namespace SampleStore.API.Controllers;
 
-[ApiController]
 [Route("auth")]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : ApiController
 {
     private readonly IAuthenticationService _authenticationService;
     private readonly IMapper _mapper;
@@ -22,23 +22,23 @@ public class AuthenticationController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
-        var authResult = _authenticationService.Register(request.FirstName,
+        ErrorOr<AuthenticationResponse> authResult = _authenticationService.Register(request.FirstName,
             request.LastName,
             request.Email,
             request.Password);
 
-        var response = _mapper.Map<AuthenticationResponse>(authResult);
-        
-        return Ok(response);
+        return authResult.Match(
+            authResult=> Ok(_mapper.Map<AuthenticationResponse>(authResult)),
+            errors => Problem(errors));
     }
     
     [HttpPost("login")]
     public IActionResult Login(LoginRequest request)
     {
-        var authResult = _authenticationService.Login(request.Email, request.Password);
+        ErrorOr<AuthenticationResponse> authResult = _authenticationService.Login(request.Email, request.Password);
         
-        var response = _mapper.Map<AuthenticationResponse>(authResult);
-        
-        return Ok(response);
+        return authResult.Match(
+            authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
+            errors => Problem(errors));
     }
 }

@@ -1,9 +1,10 @@
+using ErrorOr;
 using MapsterMapper;
 using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Common.Interfaces.Persistence;
-using SampleStore.Application.Interfaces;
 using SampleStore.Application.Models;
 using SampleStore.Application.Models.DTO;
+using SampleStore.Domain.Common;
 using SampleStore.Domain.Entities;
 
 namespace SampleStore.Application.Services;
@@ -23,11 +24,11 @@ public class AuthenticationService : IAuthenticationService
         _mapper = mapper;
     }
 
-    public AuthenticationResponse Register(string firstName, string lastName, string email, string password)
+    public ErrorOr<AuthenticationResponse> Register(string firstName, string lastName, string email, string password)
     {
         if (_userRepository.GetUserByEmail(email) is not null)
         {
-            throw new Exception($"User with Email: '{email}' already exists");
+            return Errors.User.EmailAlreadyExists(email);
         }
 
         var user = new User { FirstName = firstName, LastName = lastName, Email = email, Password = password };
@@ -39,11 +40,11 @@ public class AuthenticationService : IAuthenticationService
         return new AuthenticationResponse(userDto, token);
     }
 
-    public AuthenticationResponse Login(string email, string password)
+    public ErrorOr<AuthenticationResponse> Login(string email, string password)
     {
         if (_userRepository.GetUserByEmail(email) is not User user || user.Password != password)
         {
-            throw new Exception("Email or password is incorrect");
+            return Errors.Authentication.WrongEmailOrPassword();
         }
         
         var token = _jwtTokenGenerator.GenerateToken(user.Id, email);
