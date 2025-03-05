@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MapsterMapper;
+using Microsoft.Extensions.DependencyInjection;
 using SampleStore.Application.Interfaces;
 using SampleStore.Application.Services;
 
@@ -9,6 +10,8 @@ public static class ServiceCollectionExtension
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IMapper, Mapper>();
+        
         return services;
     }
 }

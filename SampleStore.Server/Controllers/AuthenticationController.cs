@@ -1,3 +1,4 @@
+using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleStore.Application.Interfaces;
 using SampleStore.Application.Models;
@@ -10,13 +11,15 @@ namespace SampleStore.API.Controllers;
 public class AuthenticationController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
+    private readonly IMapper _mapper;
 
-    public AuthenticationController(IAuthenticationService authenticationService)
+    public AuthenticationController(IAuthenticationService authenticationService, IMapper mapper)
     {
         _authenticationService = authenticationService;
+        _mapper = mapper;
     }
     
-    [HttpPost("Register")]
+    [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
         var authResult = _authenticationService.Register(request.FirstName,
@@ -24,21 +27,17 @@ public class AuthenticationController : ControllerBase
             request.Email,
             request.Password);
 
-        var response = new AuthenticationResponse(
-            authResult.user,
-            authResult.token);
+        var response = _mapper.Map<AuthenticationResponse>(authResult);
         
         return Ok(response);
     }
     
-    [HttpPost("Login")]
+    [HttpPost("login")]
     public IActionResult Login(LoginRequest request)
     {
         var authResult = _authenticationService.Login(request.Email, request.Password);
         
-        var response = new AuthenticationResponse(
-            authResult.user,
-            authResult.token);
+        var response = _mapper.Map<AuthenticationResponse>(authResult);
         
         return Ok(response);
     }

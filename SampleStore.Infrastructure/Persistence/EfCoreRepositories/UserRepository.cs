@@ -7,11 +7,11 @@ public class UserRepository : IUserRepository
 {
     public User? GetUserByEmail(string email)
     {
-        throw new NotImplementedException();
+        return new User { FirstName = "John", LastName = "Doe",Email = email, Password = "123456" };
     }
 
     public void AddUser(User user)
     {
-        throw new NotImplementedException();
+        return;
     }
 }

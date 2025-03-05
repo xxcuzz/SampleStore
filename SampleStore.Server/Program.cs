@@ -1,39 +1,36 @@
-using Microsoft.AspNetCore.Authentication;
 using SampleStore.API.Extensions;
+using SampleStore.API.Filters;
+using SampleStore.Application.Extensions;
 using SampleStore.Infrastructure.Extensions;
 
-namespace SampleStore.API
+namespace SampleStore.API;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+        
+        builder.Services.AddApplicationServices();
+        builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddApiServices();
+        
+        var app = builder.Build();
+        
+        app.UseDefaultFiles();
+        app.MapStaticAssets();
+        app.UseExceptionHandler("/error");
+        app.UseHttpsRedirection();
+        
+        app.UseAuthorization();
+        app.MapControllers();
+
+        app.MapGet("", () =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+        });
 
-            builder.Services.AddAuthorization();
-            builder.Services.AddControllers();
+        app.MapFallbackToFile("/index.html");
 
-            builder.Services.AddApplicationServices();
-            builder.Services.AddInfrastructureServices(builder.Configuration);
-            
-            builder.Services.AddEndpointsApiExplorer();
-            
-            var app = builder.Build();
-
-            app.UseDefaultFiles();
-            app.MapStaticAssets();
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-            app.MapGet("", () =>
-            {
-            });
-
-            app.MapFallbackToFile("/index.html");
-
-            app.Run();
-        }
+        app.Run();
     }
 }
