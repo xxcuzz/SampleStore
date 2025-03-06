@@ -1,8 +1,8 @@
 namespace SampleStore.Infrastructure.Authentication;
 
-public class JWTSettings
+public class JwtSettings
 {
-    public const string SECTION = "JWTSettings";
+    public const string Section = "JwtSettings";
     
     public string Secret { get; init; }
     public string Issuer { get; init; }

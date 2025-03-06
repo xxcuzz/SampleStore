@@ -1,7 +1,5 @@
-using SampleStore.API.Extensions;
-using SampleStore.API.Filters;
-using SampleStore.Application.Extensions;
-using SampleStore.Infrastructure.Extensions;
+using SampleStore.Application;
+using SampleStore.Infrastructure;
 
 namespace SampleStore.API;
 
@@ -11,10 +9,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         
-        builder.Services.AddApplicationServices();
-        builder.Services.AddInfrastructureServices(builder.Configuration);
-        builder.Services.AddApiServices();
-        
+        builder.Services.AddApiServices()
+            .AddInfrastructureServices(builder.Configuration)
+            .AddApplicationServices();
+
         var app = builder.Build();
         
         app.UseDefaultFiles();
@@ -24,7 +22,7 @@ public class Program
         
         app.UseAuthorization();
         app.MapControllers();
-
+        
         app.MapGet("", () =>
         {
         });

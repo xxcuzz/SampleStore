@@ -1,5 +1,6 @@
 using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SampleStore.API.Controllers;
 
@@ -8,9 +9,24 @@ public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
     {
-        var firstError = errors.First();
+        if (errors.Count == 0)
+        {
+            return Problem();
+        }
+        
+        if (errors.All(e => e.Type == ErrorType.Validation))
+        {
+            return ValidationProblem(errors);
+        }
+        
+        HttpContext.Items["errors"] = errors;
+        
+        return Problem(errors[0]);
+    }
 
-        var statusCode = firstError.Type switch
+    private IActionResult Problem(Error error)
+    {
+        var statusCode = error.Type switch
         {
             ErrorType.NotFound => StatusCodes.Status404NotFound,
             ErrorType.Unauthorized => StatusCodes.Status401Unauthorized,
@@ -20,6 +36,18 @@ public class ApiController : ControllerBase
             _ => StatusCodes.Status500InternalServerError
         };
 
-        return Problem(statusCode: statusCode, title: firstError.Description);
+        return Problem(statusCode: statusCode, title: error.Description);
+    }
+
+    private IActionResult ValidationProblem(List<Error> errors)
+    {
+        var modelStateDictionary = new ModelStateDictionary();
+        
+        foreach (var error in errors)
+        {
+            modelStateDictionary.AddModelError(error.Code, error.Description);
+        }
+            
+        return ValidationProblem(modelStateDictionary);
     }
 }

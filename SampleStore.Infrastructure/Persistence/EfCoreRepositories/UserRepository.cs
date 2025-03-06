@@ -7,7 +7,8 @@ public class UserRepository : IUserRepository
 {
     public User? GetUserByEmail(string email)
     {
-        return new User { FirstName = "John", LastName = "Doe",Email = email, Password = "123456" };
+        return null;
+        //return new User { FirstName = "John", LastName = "Doe", Email = "email", Password = "123456" };
     }
 
     public void AddUser(User user)

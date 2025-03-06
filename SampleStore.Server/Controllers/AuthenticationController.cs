@@ -1,8 +1,10 @@
 using ErrorOr;
 using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SampleStore.Application.Common.Interfaces.Authentication;
-using SampleStore.Application.Models;
+using SampleStore.Application.Authentication.Commands.Register;
+using SampleStore.Application.Authentication.Common;
+using SampleStore.Application.Authentication.Queries.Login;
 using SampleStore.Application.RequestModels.Authentication;
 
 namespace SampleStore.API.Controllers;
@@ -10,32 +12,35 @@ namespace SampleStore.API.Controllers;
 [Route("auth")]
 public class AuthenticationController : ApiController
 {
-    private readonly IAuthenticationService _authenticationService;
+    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
 
-    public AuthenticationController(IAuthenticationService authenticationService, IMapper mapper)
+    public AuthenticationController(IMapper mapper, IMediator mediator)
     {
-        _authenticationService = authenticationService;
         _mapper = mapper;
+        _mediator = mediator;
     }
     
     [HttpPost("register")]
-    public IActionResult Register(RegisterRequest request)
+    public async Task<IActionResult> Register(RegisterRequest request)
     {
-        ErrorOr<AuthenticationResponse> authResult = _authenticationService.Register(request.FirstName,
+        var command = new RegisterCommand(request.FirstName,
             request.LastName,
             request.Email,
             request.Password);
+        
+        ErrorOr<AuthenticationResult> authResult = await _mediator.Send(command);
 
         return authResult.Match(
-            authResult=> Ok(_mapper.Map<AuthenticationResponse>(authResult)),
+            authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
             errors => Problem(errors));
     }
     
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
-        ErrorOr<AuthenticationResponse> authResult = _authenticationService.Login(request.Email, request.Password);
+        var query = new LoginQuery(request.Email, request.Password);
+        ErrorOr<AuthenticationResult> authResult = await _mediator.Send(query);
         
         return authResult.Match(
             authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),

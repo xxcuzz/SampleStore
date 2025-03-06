@@ -8,11 +8,10 @@ using SampleStore.Application.Common.Interfaces.Services;
 
 namespace SampleStore.Infrastructure.Authentication;
 
-public class JWTTokenGenerator : IJWTTokenGenerator
+public class JwtTokenGenerator(IOptions<JwtSettings> jwtOptions, IDateTimeProvider dateTimeProvider) : IJwtTokenGenerator
 {
-    private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly JWTSettings _jwtSettings;
-    
+    private readonly JwtSettings _jwtSettings = jwtOptions.Value;
+
     public string GenerateToken(Guid userId, string email)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -27,7 +26,7 @@ public class JWTTokenGenerator : IJWTTokenGenerator
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = _dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes),
+            Expires = dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes),
             Issuer = _jwtSettings.Issuer,
             Audience = _jwtSettings.Audience,
             SigningCredentials =
@@ -35,6 +34,7 @@ public class JWTTokenGenerator : IJWTTokenGenerator
         };
         
         var token = tokenHandler.CreateToken(tokenDescriptor);
+        
         return tokenHandler.WriteToken(token);
     }
 }

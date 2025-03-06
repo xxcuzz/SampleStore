@@ -1,6 +1,6 @@
 namespace SampleStore.Application.Common.Interfaces.Authentication;
 
-public interface IJWTTokenGenerator
+public interface IJwtTokenGenerator
 {
     string GenerateToken(Guid userId, string email);
 }
