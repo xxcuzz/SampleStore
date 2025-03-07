@@ -21,6 +21,7 @@ public class JwtTokenGenerator(IOptions<JwtSettings> jwtOptions, IDateTimeProvid
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor

@@ -20,12 +20,9 @@ public class Program
         app.UseExceptionHandler("/error");
         app.UseHttpsRedirection();
         
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        
-        app.MapGet("", () =>
-        {
-        });
 
         app.MapFallbackToFile("/index.html");
 
