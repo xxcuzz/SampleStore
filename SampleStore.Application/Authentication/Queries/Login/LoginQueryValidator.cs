@@ -9,10 +9,10 @@ public class LoginQueryValidator : AbstractValidator<LoginQuery>
         RuleFor(x => x.Email)
             .NotEmpty()
             .NotNull()
-            .WithMessage("Email is requiredD");
+            .WithMessage("Email is required");
         RuleFor(x => x.Password)
             .NotEmpty()
             .NotNull()
-            .WithMessage("Password is requiredD");
+            .WithMessage("Password is required");
     }
 }

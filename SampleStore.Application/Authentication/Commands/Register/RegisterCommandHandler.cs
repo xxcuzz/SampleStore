@@ -5,7 +5,7 @@ using SampleStore.Application.Authentication.Common;
 using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Common.Interfaces.Persistence;
 using SampleStore.Application.Models.DTO;
-using SampleStore.Domain.Common;
+using SampleStore.Domain.Common.Errors;
 using SampleStore.Domain.Entities;
 
 namespace SampleStore.Application.Authentication.Commands.Register;

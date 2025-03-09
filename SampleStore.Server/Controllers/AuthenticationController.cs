@@ -1,6 +1,7 @@
 using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SampleStore.Application.Authentication.Commands.Register;
 using SampleStore.Application.Authentication.Common;
@@ -10,6 +11,7 @@ using SampleStore.Application.RequestModels.Authentication;
 namespace SampleStore.API.Controllers;
 
 [Route("auth")]
+[AllowAnonymous]
 public class AuthenticationController : ApiController
 {
     private readonly IMediator _mediator;
@@ -29,7 +31,7 @@ public class AuthenticationController : ApiController
             request.Email,
             request.Password);
         
-        ErrorOr<AuthenticationResult> authResult = await _mediator.Send(command);
+        var authResult = await _mediator.Send(command);
 
         return authResult.Match(
             authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
