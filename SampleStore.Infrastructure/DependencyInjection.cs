@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -8,6 +9,7 @@ using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Common.Interfaces.Persistence;
 using SampleStore.Application.Common.Interfaces.Services;
 using SampleStore.Infrastructure.Authentication;
+using SampleStore.Infrastructure.Persistence;
 using SampleStore.Infrastructure.Persistence.EfCoreRepositories;
 using SampleStore.Infrastructure.Services;
 
@@ -21,15 +23,20 @@ public static class DependencyInjection
     {
         services
             .AddAuth(configuration)
-            .AddPersistence();
+            .AddPersistence(configuration);
         
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         
         return services;
     }
 
-    private static IServiceCollection AddPersistence(this IServiceCollection services)
+    private static IServiceCollection AddPersistence(this IServiceCollection services,
+        IConfiguration configuration)
     {
+        services.AddDbContext<SampleStoreDbContext>(options =>
+        {
+          options.UseNpgsql(configuration["PostgresConnectionString"]!);
+        });
         services.AddScoped<IUserRepository,UserRepository>();
         services.AddScoped<IArticleRepository, ArticleRepository>();
         services.AddScoped<ICollectionRepository, CollectionRepository>();

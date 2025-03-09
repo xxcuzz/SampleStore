@@ -23,7 +23,7 @@ public class GetArticleByNameQueryHandler : IRequestHandler<GetArticleByNameQuer
 
     public async Task<ErrorOr<ArticleResult>> Handle(GetArticleByNameQuery query, CancellationToken cancellationToken)
     {
-        if (_articleRepository.GetArticleByName(query.Name) is not Article article)
+        if (await _articleRepository.Async(query.Name) is not Article article)
         {
             return Errors.Article.ArticleNotFound();
         }

@@ -1,10 +1,13 @@
+using SampleStore.Domain.ArticleType;
 using SampleStore.Domain.Entities;
 
 namespace SampleStore.Application.Common.Interfaces.Persistence;
 
 public interface IArticleRepository
 {
-    void Add(Article article);
+    Task AddAsync(Article article);
     
-    Article? GetArticleByName(string name);
+    Task<Article?> Async(string name);
+    
+    Task<IEnumerable<Article>> GetArticlesByTypeAsync(ArticleTypeEnum articleType);
 }

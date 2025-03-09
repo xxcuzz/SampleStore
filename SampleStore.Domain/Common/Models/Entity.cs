@@ -10,6 +10,7 @@ public abstract class Entity<TId>
         Id = id;
     }
 
+    protected Entity() { }
     public override bool Equals(object? obj)
     {
         return obj is Entity<TId> other && Id.Equals(other.Id);

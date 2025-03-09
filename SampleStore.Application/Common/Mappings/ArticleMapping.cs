@@ -26,5 +26,13 @@ public class ArticleMapping : IRegister
             .Map(dest => dest.CollectionIds,
                 src => src.CollectionIds.Select(id => id.Value).ToList())
             .TwoWays();
+
+        config.NewConfig<ArticleDto, ArticleResult>()
+            .Map(dest => dest.ArticleDto.Id, src => src.Id)
+            .Map(dest => dest.ArticleDto.Name, src => src.Name)
+            .Map(dest => dest.ArticleDto.OriginalPrice, src => src.OriginalPrice)
+            .Map(dest => dest.ArticleDto.DiscountedPrice, src => src.DiscountedPrice)
+            .Map(dest => dest.ArticleDto.CollectionIds, src => src.CollectionIds)
+            .TwoWays();
     }
 }

@@ -5,6 +5,7 @@ using MediatR;
 using SampleStore.Application.Articles.Common;
 using SampleStore.Application.Common.Interfaces.Persistence;
 using SampleStore.Application.Models.DTO;
+using SampleStore.Domain.Common.Errors;
 using SampleStore.Domain.Entities;
 using SampleStore.Domain.ValueObjects;
 
@@ -26,14 +27,27 @@ public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand,
     public async Task<ErrorOr<ArticleResult>> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
+
+        var existingCollectionsIds = await _collectionRepository.GetAllIdsAsync();
+
+        if (existingCollectionsIds == null || existingCollectionsIds.Count == 0)
+        {
+            return Errors.Collection.CollectionListIsEmpty();
+        }
+        
+        var invalidCollectionIds = request.CollectionIds.Except(existingCollectionsIds);
+
+        if (invalidCollectionIds.Any())
+        {
+            return Errors.Collection.CollectionNotFound();
+        }
+        
         var collectionIds = request.CollectionIds
             .Select(id => CollectionId.Create(id))
             .ToList();
         
-        var price = Price.Create(request.Price);
-        
-        var article = Article.Create(request.Name, price, collectionIds);
-        _articleRepository.Add(article);
+        var article = Article.Create(request.Name, request.Price, collectionIds, request.ArticleType);
+        _articleRepository.AddAsync(article);
         
         var articleDto = _mapper.Map<ArticleDto>(article);
         

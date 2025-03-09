@@ -34,7 +34,7 @@ public class CollectionsController : ApiController
             collectionResult => Ok(_mapper.Map<CollectionResponse>(collectionResult)),
             errors => Problem(errors));
     }
-
+    
     [HttpPost("create")]
     public async Task<IActionResult> CreateCollection(CreateCollectionRequest request)
     {

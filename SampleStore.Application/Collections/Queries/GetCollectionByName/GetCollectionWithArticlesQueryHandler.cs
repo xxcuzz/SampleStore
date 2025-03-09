@@ -10,7 +10,8 @@ using SampleStore.Domain.Entities;
 
 namespace SampleStore.Application.Collections.Queries.GetCollectionByName;
 
-public class GetCollectionWithArticlesQueryHandler : IRequestHandler<GetCollectionWithArticlesQuery, ErrorOr<CollectionResult>>
+public class GetCollectionWithArticlesQueryHandler :
+    IRequestHandler<GetCollectionWithArticlesQuery, ErrorOr<CollectionResult>>
 {
     private readonly ICollectionRepository _collectionRepository;
     private readonly IMapper _mapper;
@@ -24,7 +25,7 @@ public class GetCollectionWithArticlesQueryHandler : IRequestHandler<GetCollecti
     public async Task<ErrorOr<CollectionResult>> Handle(GetCollectionWithArticlesQuery query,
         CancellationToken cancellationToken)
     {
-        if (_collectionRepository.GetCollectionWithArticles(query.Name) is not Collection collection)
+        if (await _collectionRepository.GetCollectionWithArticlesAsync(query.Name) is not Collection collection)
         {
             return Errors.Collection.CollectionNotFound();
         }

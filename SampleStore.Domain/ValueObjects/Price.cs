@@ -4,8 +4,8 @@ namespace SampleStore.Domain.ValueObjects;
 
 public class Price : ValueObject
 {
-    public decimal OriginalPrice { get; }
-    public decimal? DiscountedPrice { get; }
+    public decimal OriginalPrice { get; private set; }
+    public decimal? DiscountedPrice { get; private set; }
 
     private Price(decimal originalPrice, decimal? discountedPrice)
     {

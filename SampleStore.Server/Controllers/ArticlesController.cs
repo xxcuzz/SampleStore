@@ -39,7 +39,7 @@ public class ArticlesController : ApiController
     [HttpPost("create")]
     public async Task<IActionResult> CreateArticle(CreateArticleRequest request)
     {
-        var command = new CreateArticleCommand(request.Name,request.Price, request.CollectionIds);
+        var command = new CreateArticleCommand(request.Name,request.Price, request.CollectionIds, request.ArticleType);
         
         var createArticleResult = await _mediator.Send(command);
         return createArticleResult.Match(

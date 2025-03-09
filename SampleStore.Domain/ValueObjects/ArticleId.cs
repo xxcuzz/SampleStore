@@ -4,7 +4,7 @@ namespace SampleStore.Domain.ValueObjects;
 
 public sealed class ArticleId : ValueObject
 {
-    public Guid Value { get; }
+    public Guid Value { get; private set; }
 
     private ArticleId(Guid value)
     {

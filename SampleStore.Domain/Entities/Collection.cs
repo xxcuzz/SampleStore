@@ -5,14 +5,17 @@ namespace SampleStore.Domain.Entities;
 
 public sealed class Collection : Entity<CollectionId>
 {
-    public string Name { get; }
-    public List<ArticleId>? ArticleIds { get; }
+    public string Name { get; private set; }
+    public List<ArticleId>? ArticleIds { get; private set; }
     
     // TODO
     // collectionDiscount
     
-    private Collection(CollectionId collectionId, string name, List<ArticleId>? articleIds = null) : base(collectionId)
+    private Collection() { }
+    
+    public Collection(CollectionId collectionId, string name, List<ArticleId>? articleIds = null) : base(collectionId)
     {
+        Id = collectionId;
         Name = name;
         ArticleIds = articleIds;
     }

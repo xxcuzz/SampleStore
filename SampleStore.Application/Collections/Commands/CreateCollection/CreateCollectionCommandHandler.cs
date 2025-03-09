@@ -23,11 +23,9 @@ public class CreateCollectionCommandHandler : IRequestHandler<CreateCollectionCo
 
     public async Task<ErrorOr<CollectionResult>> Handle(CreateCollectionCommand request, CancellationToken cancellationToken)
     {
-        await Task.CompletedTask;
-
         var articlesIds = request.ArticleIds?.Select(id => ArticleId.Create(id)).ToList();
         var collection = Collection.Create(request.Name, articlesIds);
-        _collectionRepository.Add(collection);
+        await _collectionRepository.AddAsync(collection);
         var collectionDto = _mapper.Map<CollectionDto>(collection);
         
         return new CollectionResult(collectionDto);

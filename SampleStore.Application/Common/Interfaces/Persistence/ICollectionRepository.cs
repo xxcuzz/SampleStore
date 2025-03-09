@@ -4,7 +4,9 @@ namespace SampleStore.Application.Common.Interfaces.Persistence;
 
 public interface ICollectionRepository
 {
-    void Add(Collection collection);
+    Task AddAsync(Collection collection);
 
-    Collection? GetCollectionWithArticles(string name);
+    Task<Collection?> GetCollectionWithArticlesAsync(string name);
+    
+    Task<List<Guid>?> GetAllIdsAsync();
 }
