@@ -1,6 +1,6 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using SampleStore.Application.Articles.Commands.CreateArticle;
 using SampleStore.Application.Articles.Common;
 using SampleStore.Application.Articles.Queries.GetArticleByName;
+using SampleStore.Application.Articles.Queries.GetArticlesByCategoryId;
+using SampleStore.Application.Articles.Queries.GetArticlesByCollectionId;
 using SampleStore.Application.RequestModels.Article;
 
 namespace SampleStore.API.Controllers;
@@ -39,11 +41,35 @@ public class ArticlesController : ApiController
     [HttpPost("create")]
     public async Task<IActionResult> CreateArticle(CreateArticleRequest request)
     {
-        var command = new CreateArticleCommand(request.Name,request.Price, request.CollectionIds, request.ArticleType);
+        var command = new CreateArticleCommand(request.Name,request.Price, request.CollectionIds);
         
         var createArticleResult = await _mediator.Send(command);
         return createArticleResult.Match(
             createArticleResult => Ok(_mapper.Map<ArticleResponse>(createArticleResult)),
             errors => Problem(errors));
+    }
+
+    [HttpGet("bycategory")]
+    public async Task<IActionResult> GetArticlesByCategoryId(GetArticlesByCategoryIdQuery request)
+    {
+        var query = new GetArticlesByCategoryIdQuery(request.CategoryId);
+        
+        var result = await _mediator.Send(query);
+        
+        return result.Match(results => 
+            Ok(_mapper.Map<List<ArticleResponse>>(results)),
+            errors => Problem(errors)); 
+    }
+    
+    [HttpGet("bycollection")]
+    public async Task<IActionResult> GetArticlesByCollectionId(GetArticlesByCollectionIdQuery request)
+    {
+        var query = new GetArticlesByCollectionIdQuery(request.CollectionId);
+        
+        var result = await _mediator.Send(query);
+        
+        return result.Match(results => 
+                Ok(_mapper.Map<List<ArticleResponse>>(results)),
+            errors => Problem(errors)); 
     }
 }

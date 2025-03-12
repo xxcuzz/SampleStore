@@ -1,11 +1,10 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
 
 using SampleStore.Application.Articles.Common;
 using SampleStore.Application.Common.Interfaces.Persistence;
 using SampleStore.Application.Models.DTO;
-using SampleStore.Domain.Common.Errors;
 using SampleStore.Domain.Entities;
 using SampleStore.Domain.ValueObjects;
 
@@ -24,32 +23,33 @@ public class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand,
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<ArticleResult>> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
+    public async ValueTask<ErrorOr<ArticleResult>> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
 
-        var existingCollectionsIds = await _collectionRepository.GetAllIdsAsync();
-
-        if (existingCollectionsIds == null || existingCollectionsIds.Count == 0)
-        {
-            return Errors.Collection.CollectionListIsEmpty();
-        }
-        
-        var invalidCollectionIds = request.CollectionIds.Except(existingCollectionsIds);
-
-        if (invalidCollectionIds.Any())
-        {
-            return Errors.Collection.CollectionNotFound();
-        }
+        // TODO redo
+        // var existingCollectionsIds = await _collectionRepository.GetAllIdsAsync();
+        //
+        // if (existingCollectionsIds == null || existingCollectionsIds.Count == 0)
+        // {
+        //     return Errors.Collection.CollectionListIsEmpty();
+        // }
+        //
+        // var invalidCollectionIds = request.CollectionIds.Except(existingCollectionsIds);
+        //
+        // if (invalidCollectionIds.Any())
+        // {
+        //     return Errors.Collection.CollectionNotFound();
+        // }
         
         var collectionIds = request.CollectionIds
             .Select(id => CollectionId.Create(id))
             .ToList();
         
-        var article = Article.Create(request.Name, request.Price, collectionIds, request.ArticleType);
-        _articleRepository.AddAsync(article);
+        var article = Article.Create(request.Name, request.Price, collectionIds, null);
+        await _articleRepository.AddAsync(article);
         
-        var articleDto = _mapper.Map<ArticleDto>(article);
+        var articleDto = _mapper.Map<ArticleDtoSlim>(article);
         
         return new ArticleResult(articleDto);
     }

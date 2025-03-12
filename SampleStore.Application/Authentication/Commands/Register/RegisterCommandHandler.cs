@@ -1,6 +1,7 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
+
 using SampleStore.Application.Authentication.Common;
 using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Common.Interfaces.Persistence;
@@ -27,7 +28,7 @@ public class RegisterCommandHandler :
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
+    public async ValueTask<ErrorOr<AuthenticationResult>> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         if (_userRepository.GetUserByEmail(command.Email) is not null)
         {

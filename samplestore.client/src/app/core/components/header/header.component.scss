@@ -1,0 +1,137 @@
+@use 'mixins/blur';
+
+:host {
+  position: fixed;
+  display: block;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 1);
+  letter-spacing: .1rem;
+  font-family: 'airbn2plt';
+  @include blur.white;
+}
+
+.banner {
+  --gap: 1rem;
+  display: flex;
+  gap: var(--gap);
+  font-size: clamp(0.3rem, 1vw, 0.5rem);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--light-grey-color);
+}
+
+.banner__content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: var(--gap);
+  animation: running-line 100s linear infinite;
+
+  margin: 0;
+  list-style-type: none;
+}
+
+@media(max-width: 700px) {
+  .banner__content {
+    animation: running-line 15s linear infinite;
+  }
+}
+
+@keyframes running-line {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.navbar-menu {
+  display: flex;
+  border: 1px solid var(--light-grey-color);
+  border-top: none;
+  font-size: clamp(0.4rem, 2vw,0.6rem);
+  user-select: none;
+  justify-content: space-between;
+}
+
+.navbar-button-wrapper {
+  display: flex;
+  padding: 0.5rem;
+  gap: clamp(0rem, .5rem, .5rem);
+  border-right: 1px solid var(--light-grey-color);
+  cursor: pointer;
+  flex-grow: 1;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:nth-child(1) {
+    width: 15%;
+  }
+
+  &:nth-child(2) {
+    justify-content: end;
+    width: 35%;
+  }
+
+  &:nth-child(3) {
+    justify-content: center;
+    width: 27%;
+  }
+
+  &:nth-child(4) {
+    justify-content: end;
+    width: 8%;
+  }
+
+  &:nth-child(5) {
+    justify-content: end;
+    width: 15%;
+  }
+}
+
+.menu-button-wrapper {
+  display: flex;
+  justify-content: end;
+  gap: .5rem;
+  width: 100%;
+}
+
+.spiral-icon {
+  width: 0.7rem;
+  height: 0.7rem;
+  background-image: url('../../../../assets/icons/dot-icon.png');
+  background-size: cover;
+}
+
+@media(max-width: 1200px) {
+  .spiral-icon {
+    display: none;
+  }
+}
+
+@media(max-width: 700px) {
+  .navbar-button-wrapper:nth-child(3) {
+    display: none;
+  }
+
+  .navbar-button-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar-button {
+    margin: auto;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}

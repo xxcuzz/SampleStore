@@ -1,6 +1,6 @@
 using ErrorOr;
 using FluentValidation;
-using MediatR;
+using Mediator;
 
 namespace SampleStore.Application.Common.Behaviors;
 
@@ -16,19 +16,18 @@ public class ValidationBehavior<TRequest, TResponse> :
         _validator = validator;
     }
 
-    public async Task<TResponse> Handle(TRequest request,
-        RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async ValueTask<TResponse> Handle(TRequest message, CancellationToken cancellationToken, MessageHandlerDelegate<TRequest, TResponse> next)
     {
         if (_validator is null)
         {
-            return await next();
+            return await next(message, cancellationToken);
         }
         
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await _validator.ValidateAsync(message, cancellationToken);
 
         if (validationResult.IsValid)
         {
-            return await next();
+            return await next(message, cancellationToken);
         }
 
         var errors = validationResult.Errors.

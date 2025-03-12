@@ -1,5 +1,6 @@
 using ErrorOr;
-using MediatR;
+using Mediator;
+
 using SampleStore.Application.Authentication.Common;
 
 namespace SampleStore.Application.Authentication.Queries.Login;

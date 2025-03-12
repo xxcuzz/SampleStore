@@ -1,30 +1,3 @@
 ﻿:host {
   text-align: center;
 }
-
-.posthuman-image-container {
-  position: relative;
-  width: 100%;
-}
-
-.posthuman-image {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 80vh;
-  object-fit: cover;
-}
-
-@media (max-width: 700px) {
-  .posthuman-image-container {
-    width: 100vw;
-    margin-left: -50vw;
-    left: 50%;
-  }
-
-  .posthuman-image {
-    width: 100vw;
-    height: 80vh;
-    left: 0;
-  }
-}

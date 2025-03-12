@@ -1,6 +1,7 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
+
 
 using SampleStore.Application.Collections.Common;
 using SampleStore.Application.Common.Interfaces.Persistence;
@@ -21,7 +22,8 @@ public class CreateCollectionCommandHandler : IRequestHandler<CreateCollectionCo
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<CollectionResult>> Handle(CreateCollectionCommand request, CancellationToken cancellationToken)
+    public async ValueTask<ErrorOr<CollectionResult>> Handle(CreateCollectionCommand request,
+        CancellationToken cancellationToken)
     {
         var articlesIds = request.ArticleIds?.Select(id => ArticleId.Create(id)).ToList();
         var collection = Collection.Create(request.Name, articlesIds);

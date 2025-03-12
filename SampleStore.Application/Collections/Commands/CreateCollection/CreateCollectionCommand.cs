@@ -1,5 +1,5 @@
 using ErrorOr;
-using MediatR;
+using Mediator;
 
 using SampleStore.Application.Collections.Common;
 

@@ -1,10 +1,9 @@
 using ErrorOr;
-using MediatR;
+using Mediator;
 
 using SampleStore.Application.Articles.Common;
-using SampleStore.Domain.ArticleType;
 
 namespace SampleStore.Application.Articles.Commands.CreateArticle;
 
-public record CreateArticleCommand(string Name, decimal Price, List<Guid> CollectionIds, ArticleTypeEnum ArticleType)
+public record CreateArticleCommand(string Name, decimal Price, List<Guid> CollectionIds)
     : IRequest<ErrorOr<ArticleResult>>;

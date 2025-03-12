@@ -9,6 +9,14 @@ public static class DependencyInjection
         services.AddSwaggerGen();
         services.AddProblemDetails();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAngularDev", builder =>
+                builder.WithOrigins("https://localhost:59175")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+        });
+        
         return services;
     }
 }
