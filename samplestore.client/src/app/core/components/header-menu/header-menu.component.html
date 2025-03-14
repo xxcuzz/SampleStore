@@ -1,0 +1,37 @@
+<div class="app-header-menu-inner">
+  <div class="header-menu-item item-1">
+    <a *ngFor="let collection of collections"
+    [href]="collection.url"
+       class="menu-link">{{collection.name}}</a>
+  </div>
+
+  <div class="header-menu-item item-2">
+    <a *ngFor="let category of displayGroups[0]" 
+       [href]="category.url"
+       class="menu-link">{{ category.name }}</a>
+  </div>
+
+  <div class="header-menu-item item-3">
+    <a *ngFor="let category of displayGroups[1]"
+       [href]="category.url"
+       class="menu-link">{{category.name}}</a>
+  </div>
+
+  <div class="header-menu-item item-4">
+    <a *ngFor="let category of displayGroups[2]"
+       [href]="category.url"
+       class="menu-link">
+      {{ category.name }}
+    </a>
+  </div>
+
+  <div class="header-menu-item item-5">
+    <a href="/" aria-current="page" class="menu-link w-inline-block w--current">
+      <div class="nav-menu-text">SAMPLESTORE</div>
+    </a>
+    <a href="/pages/size-chart" class="menu-link">Size chart</a>
+    <a href="/pages/contact" class="menu-link">Contact</a>
+    <a href="/pages/faq" class="menu-link">FAQ</a>
+    <a href="/pages/about" class="menu-link">ABOUT</a>
+  </div>
+</div>

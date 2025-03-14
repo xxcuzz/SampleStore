@@ -14,8 +14,7 @@ public class ArticleMapping : IRegister
             .Map(dest => dest.Id, src => src.ArticleDto.Id)
             .Map(dest => dest.Name, src => src.ArticleDto.Name)
             .Map(dest => dest.OriginalPrice, src => src.ArticleDto.OriginalPrice)
-            .Map(dest => dest.DiscountedPrice, src => src.ArticleDto.DiscountedPrice)
-            .Map(dest => dest.CollectionIds, src => src.ArticleDto.CollectionIds)
+            //.Map(dest => dest.DiscountedPrice, src => src.ArticleDto.DiscountedPrice)
             .TwoWays();
         
         config.NewConfig<Article, ArticleDto>()
@@ -27,12 +26,10 @@ public class ArticleMapping : IRegister
                 src => src.CollectionIds.Select(id => id.Value).ToList())
             .TwoWays();
 
-        config.NewConfig<ArticleDto, ArticleResult>()
-            .Map(dest => dest.ArticleDto.Id, src => src.Id)
-            .Map(dest => dest.ArticleDto.Name, src => src.Name)
-            .Map(dest => dest.ArticleDto.OriginalPrice, src => src.OriginalPrice)
-            .Map(dest => dest.ArticleDto.DiscountedPrice, src => src.DiscountedPrice)
-            .Map(dest => dest.ArticleDto.CollectionIds, src => src.CollectionIds)
-            .TwoWays();
+        config.NewConfig<ArticleResult, ArticleDtoSlim>()
+            .Map(dest => dest, src => src.ArticleDto);
+
+        config.NewConfig<ArticleDtoSlim, ArticleResult>()
+            .Map(dest => dest.ArticleDto, src => src);
     }
 }

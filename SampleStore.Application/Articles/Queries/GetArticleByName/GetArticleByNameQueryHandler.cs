@@ -1,12 +1,9 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
 
 using SampleStore.Application.Articles.Common;
 using SampleStore.Application.Common.Interfaces.Persistence;
-using SampleStore.Application.Models.DTO;
-using SampleStore.Domain.Common.Errors;
-using SampleStore.Domain.Entities;
 
 namespace SampleStore.Application.Articles.Queries.GetArticleByName;
 
@@ -21,15 +18,16 @@ public class GetArticleByNameQueryHandler : IRequestHandler<GetArticleByNameQuer
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<ArticleResult>> Handle(GetArticleByNameQuery query, CancellationToken cancellationToken)
+    public async ValueTask<ErrorOr<ArticleResult>> Handle(GetArticleByNameQuery query, CancellationToken cancellationToken)
     {
-        if (await _articleRepository.Async(query.Name) is not Article article)
-        {
-            return Errors.Article.ArticleNotFound();
-        }
-        
-        var articleDto = _mapper.Map<ArticleDto>(article);
-        
-        return new ArticleResult(articleDto);
+        throw new NotImplementedException();
+        // if (await _articleRepository.GetArticleByNameAsync(query.Name) is not ArticleSlimDto article)
+        // {
+        //     return Errors.Article.ArticleNotFound();
+        // }
+        //
+        // var articleDto = _mapper.Map<ArticleSlimDto>(article);
+        //
+        // return new ArticleResult(articleDto.Id);
     }
 }

@@ -11,18 +11,19 @@ public class CollectionMapping : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<CollectionResult, CollectionResponse>()
-            .Map(dest => dest.Id, src => src.CollectionDto.Id)
-            .Map(dest => dest.Name, src => src.CollectionDto.Name)
-            .Map(dest => dest.ArticleIds,
-                src => src.CollectionDto.ArticleIds)
-            .TwoWays();
+            .Map(dest => dest, src => src.CollectionDto);
+        config.NewConfig<CollectionResponse, CollectionResult>()
+            .Map(dest => dest.CollectionDto, src => src);
         
         config.NewConfig<Collection, CollectionDto>()
             .Map(dest => dest.Id, src => src.Id.Value)
             .Map(dest => dest.Name, src => src.Name)
-            .Map(dest => dest.ArticleIds, 
-                src => src.ArticleIds != null ?
-                    src.ArticleIds.Select(id => id.Value).ToList() : new List<Guid>())
             .TwoWays();
+
+        config.NewConfig<CollectionDtoSlim, CollectionResult>()
+            .Map(dest => dest.CollectionDto, src => src);
+        
+        config.NewConfig<CollectionResult, CollectionDtoSlim>()
+            .Map(dest => dest, src => src.CollectionDto);
     }
 }

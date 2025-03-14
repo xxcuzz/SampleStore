@@ -1,6 +1,7 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
+
 using SampleStore.Application.Authentication.Common;
 using SampleStore.Application.Common.Interfaces.Authentication;
 using SampleStore.Application.Common.Interfaces.Persistence;
@@ -23,7 +24,7 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<Authenticat
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
+    public async ValueTask<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         if (_userRepository.GetUserByEmail(query.Email) is not User user || user.Password != query.Password)
         {

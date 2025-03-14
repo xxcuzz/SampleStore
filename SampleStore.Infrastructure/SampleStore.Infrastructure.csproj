@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="dbup-postgresql" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
@@ -18,6 +20,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SampleStore.Application\SampleStore.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Persistence\Dapper\Scripts\Script0001 - Create tables.sql" />
+    <EmbeddedResource Include="Persistence\Dapper\Scripts\Script0001 - Create tables.sql" />
+    <None Remove="Persistence\Dapper\Scripts\Script0002 - Create article_categoryid index.sql" />
+    <None Remove="Persistence\Dapper\Scripts\Script0002 - Add slugs, release_date.sql" />
+    <EmbeddedResource Include="Persistence\Dapper\Scripts\Script0002 - Add slugs, release_date.sql" />
   </ItemGroup>
 
 </Project>

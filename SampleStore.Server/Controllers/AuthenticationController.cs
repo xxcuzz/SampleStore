@@ -1,6 +1,7 @@
 using ErrorOr;
 using MapsterMapper;
-using MediatR;
+using Mediator;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SampleStore.Application.Authentication.Commands.Register;
