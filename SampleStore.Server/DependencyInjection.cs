@@ -12,7 +12,7 @@ public static class DependencyInjection
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAngularDev", builder =>
-                builder.WithOrigins("https://localhost:59175")
+                builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod());
         });

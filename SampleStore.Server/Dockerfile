@@ -2,16 +2,12 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+EXPOSE 80
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS with-node
-RUN apt-get update
-RUN apt-get install curl
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
 RUN apt-get -y install nodejs
 RUN npm install -g @angular/cli
@@ -19,11 +15,14 @@ RUN npm install -g @angular/cli
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SampleStore.API/SampleStore.API.csproj", "SampleStore.API/"]
+COPY ["SampleStore.Server/SampleStore.API.csproj", "SampleStore.API/"]
+COPY ["SampleStore.Application/SampleStore.Application.csproj", "SampleStore.Application/"]
+COPY ["SampleStore.Infrastructure/SampleStore.Infrastructure.csproj", "SampleStore.Infrastructure/"]
+COPY ["SampleStore.Domain/SampleStore.Domain.csproj", "SampleStore.Domain/"]
 COPY ["samplestore.client/samplestore.client.esproj", "samplestore.client/"]
 RUN dotnet restore "./SampleStore.API/SampleStore.API.csproj"
 COPY . .
-WORKDIR "/src/SampleStore.API"
+WORKDIR "/src/SampleStore.Server"
 RUN dotnet build "./SampleStore.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage

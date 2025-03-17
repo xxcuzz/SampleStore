@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  samplestore.api:
+    image: ${DOCKER_REGISTRY-}samplestorewebapi
+    build: 
+      context: .
+      dockerfile: SampleStore.Server/Dockerfile
+    ports:
+      - "8080:80"
+      - "59175:59175"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - USER_SECRETS_ID=9f4e98e1-4174-41e3-a572-bc0dd5d91cae
+    volumes:
+      - $APPDATA/Microsoft/UserSecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+    depends_on:
+      - samplestore.db
+
+  samplestore.db:
+    image: postgres:latest
+    container_name: samplestore.db
+    environment:
+      - POSTGRES_DB=SampleStore
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=strong_passworq
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
